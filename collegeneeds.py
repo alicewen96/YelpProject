@@ -58,11 +58,9 @@ TOKEN_PATH = '/oauth2/token'
 GRANT_TYPE = 'client_credentials'
 
 
-# Defaults for our simple example.
-#DEFAULT_TERM = 'dinner'
-#DEFAULT_LOCATION = 'San Francisco, CA'
+# Defaults
 DEFAULT_TERM = 'pizza'
-DEFAULT_LOCATION = 'Redmond, WA, US'
+DEFAULT_LOCATION = 'Irvine, CA, US'
 SEARCH_LIMIT = 10
 
 
@@ -178,7 +176,6 @@ def query_api(term, location):
     #change [0] in businesses to get top "n" indexes
 
     business_id = businesses[4]['id']
-    #print("business_id: ", business_id)
 
     print(u'{0} businesses found, querying business info ' \
         'for the top result "{1}" ...'.format(
@@ -211,20 +208,12 @@ def query_api(term, location):
         time_diff = timedelta(hours = end_time.hour-start_time.hour, minutes = end_time.minute - start_time.minute)
 
         print("Time left open: ", time_diff)
-        
-        #if hours_left_open > 0:
-        #    print("You have ", hours_left_open ," hours and ", minutes_left_open, " minutes before closing")
-        #else:
-         #   print("You have ", minutes_left_open, "minutes before closing. Run run run.")
 
     ## add if open overnight: [open][is_overnight] (for each day)
     for day in hours['open']:
         ##enum with weekdays and check if overnight
         if day['is_overnight']:
             print("\tOpen Overnight on ", day_dict[day['day']])
-        #else:
-        #    print("NOT Open Overnight on ", day_dict[day['day']])
-    
 
     ## add distance to place
     location_lat, location_long = int(response['coordinates']['latitude']), int(response['coordinates']['longitude'])
